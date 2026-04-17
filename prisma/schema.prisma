@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id        String    @id @default(cuid())
+  nome      String
+  empresa   String
+  email     String    @unique
+  telefone  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projetos Projeto[]
+
+  @@map("clientes")
+}
+
+model Produto {
+  id                String   @id @default(cuid())
+  productKey        String   @unique
+  productName       String
+  shortDescription  String
+  fullDescription   String
+  idealFor          String   @default("[]")
+  mainPainsSolved   String   @default("[]")
+  deliverablesJson  String   @default("[]")
+  differentialsJson String   @default("[]")
+  priorityRulesJson String   @default("[]")
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  servicosVendidos ServicoVendido[]
+
+  @@map("produtos")
+}
+
+model Projeto {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  clienteId       String
+  nomeProjeto     String
+  status          String        @default("draft")
+  transcricao     String?
+  observacoes     String?
+  diagnosticoJson String?
+  lrpConteudoJson String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  cliente          Cliente        @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  servicosVendidos ServicoVendido[]
+
+  @@index([clienteId])
+  @@index([status])
+  @@map("projetos")
+}
+
+model ServicoVendido {
+  id        String   @id @default(cuid())
+  projetoId String
+  produtoId String?
+  nome      String
+  escopo    String
+
+  projeto   Projeto  @relation(fields: [projetoId], references: [id], onDelete: Cascade)
+  produto   Produto? @relation(fields: [produtoId], references: [id])
+
+  @@index([projetoId])
+  @@map("servicos_vendidos")
+}

@@ -1,0 +1,38 @@
+name = "v4-delivery-intelligence"
+main = "dist/index.js"
+compatibility_date = "2024-12-10"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "v4-delivery-intelligence-prod"
+route = "fred-proposta.com/*"
+zone_id = ""
+
+[env.staging]
+name = "v4-delivery-intelligence-staging"
+route = "staging-fred-proposta.com/*"
+zone_id = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fred-database"
+database_id = ""
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "fred-proposta-files"
+
+[triggers]
+crons = ["0 0 * * *"]
+
+[env.production.vars]
+ENVIRONMENT = "production"
+
+[env.production.secrets]
+DATABASE_URL = ""
+NEXTAUTH_SECRET = ""
+ANTHROPIC_API_KEY = ""
+NEXTAUTH_URL = ""
+NEXT_PUBLIC_APP_URL = ""
+NEXT_PUBLIC_APP_DOMAIN = ""
+AI_MODEL = "claude-3-5-sonnet-20241022"
