@@ -1,8 +1,5 @@
 import { notFound } from 'next/navigation';
 import prisma from '@/lib/db';
-
-export const runtime = 'edge';
-
 interface PageProps {
   params: Promise<{ slug: string }>;
 }

@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server';
 import { projetoService } from '@/services/projeto.service';
 import { clienteSchema, projetoSchema } from '@/schemas/projeto.schema';
 import prisma from '@/lib/db';
-
-export const runtime = 'edge';
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
