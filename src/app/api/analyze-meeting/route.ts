@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { meetingAnalysisService } from '@/services/meeting-analysis.service';
 
+export const runtime = 'edge';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();

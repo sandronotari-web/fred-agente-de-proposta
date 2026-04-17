@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 import { slugify } from '@/lib/utils';
 
+export const runtime = 'edge';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();

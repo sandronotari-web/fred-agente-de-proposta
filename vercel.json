@@ -1,18 +1,4 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "ANTHROPIC_API_KEY": "@anthropic_api_key",
-    "NEXTAUTH_SECRET": "@nextauth_secret",
-    "NEXTAUTH_URL": "@nextauth_url",
-    "NEXT_PUBLIC_APP_URL": "@next_public_app_url",
-    "NEXT_PUBLIC_APP_DOMAIN": "@next_public_app_domain",
-    "AI_MODEL": "claude-3-5-sonnet-20241022"
-  },
-  "functions": {
-    "api/**": {
-      "maxDuration": 60
-    }
-  }
+  "outputDirectory": ".next"
 }

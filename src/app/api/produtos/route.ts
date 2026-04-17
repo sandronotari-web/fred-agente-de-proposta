@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { produtoService } from '@/services/produto.service';
 import { produtoSchema } from '@/schemas/produto.schema';
 
+export const runtime = 'edge';
+
 export async function GET() {
   try {
     const produtos = await produtoService.findAll();
